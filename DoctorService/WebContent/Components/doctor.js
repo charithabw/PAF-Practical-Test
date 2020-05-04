@@ -23,17 +23,62 @@ if (status != true)
 	} 
 	 
 	 // If valid------------------------  
-$("#formDoctor").submit(); 
-}); 
-	 
+var type = ($("#hidItemIDSave").val() == "") ? "POST" : "PUT"; 
+
+$.ajax( 
+		{  url : "DoctorAPI",
+			type : type,
+			data : $("#formDoctor").serialize(),
+			dataType : "text",
+			complete : function(response, status)  
+			{   
+				onItemSaveComplete(response.responseText, status);  
+				} 
+		}); 
+});
+		
+function onItemSaveComplete(response, status) 
+{  
+	if (status == "success")  
+	{   
+		var resultSet = JSON.parse(response); 
+
+
+		if (resultSet.status.trim() == "success")   
+		{    
+			$("#alertSuccess").text("Successfully saved.");    
+			$("#alertSuccess").show(); 
+		
+			$("#divItemsGrid").html(resultSet.data);   
+		 }
+		else if (resultSet.status.trim() == "error")   
+		{   
+			$("#alertError").text(resultSet.data);    
+			$("#alertError").show();   
+		} 
+
+} 
+else if (status == "error")  
+{   
+	$("#alertError").text("Error while saving.");   
+	$("#alertError").show();  
+}
+else  {  
+	$("#alertError").text("Unknown error while saving..");   
+	$("#alertError").show();  
+	} 
+
+$("#hidItemIDSave").val("");  
+$("#formItem")[0].reset();
+} 
 
 
 function validateDoctorForm() { 
 	// CODE  
-	if ($("#doctorID").val().trim() == "")  
-	{   
-		return "Insert Doctor ID.";  
-	} 
+//	if ($("#doctorID").val().trim() == "")  
+//	{   
+//		return "Insert Doctor ID.";  
+//	} 
 	 
 	 // NAME  
 	if ($("#doctorName").val().trim() == "")  
@@ -76,4 +121,5 @@ function validateDoctorForm() {
 		return "Insert Password.";  
 		}
 	
-	 return true; } 
+	 return true; 
+	 } 

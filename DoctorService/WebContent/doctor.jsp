@@ -16,9 +16,9 @@
 <div class="col-6">  
 <h1>Hospital Management </h1> 
  
- <form id="formDoctor" name="formDoctor">
+ <form id="formDoctor" name="formDoctor" method="post" >
     
-  <br> Doctor id:   <input id="doctorID" name="doctorID" type="text" class="form-control form-control-sm"> 
+  <!--  <br> Doctor id:   <input id="doctorID" name="doctorID" type="text" class="form-control form-control-sm">-->
  
   <br> Doctor name:   <input id="doctorName" name="doctorName" type="text" class="form-control form-control-sm"> 
  

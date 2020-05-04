@@ -29,21 +29,21 @@ public class DoctorRepository {
 		}
 	}
 
-	public String create(Doctor d) {
+	public String create(String doctorName, String specialization, String hospital, String nic, String email, String phone, String password) {
 		String output = "";
 		String sql = "INSERT INTO doctormanagement VALUES (?,?,?,?,?,?,?,?)";
 
 		try {
 			PreparedStatement st = con.prepareStatement(sql);
 
-			st.setInt(1, d.getDoctor_id());
-			st.setString(2, d.getDoctor_name());
-			st.setInt(3, d.getSpecialization());
-			st.setInt(4, d.getHospital_id());
-			st.setString(5, d.getNIC());
-			st.setString(6, d.getEmail());
-			st.setString(7, d.getPhone());
-			st.setString(8, d.getPassword());
+			st.setInt(1, 12);
+			st.setString(2, doctorName);
+			st.setInt(3, Integer.parseInt(specialization));
+			st.setInt(4, Integer.parseInt(hospital));
+			st.setString(5, nic);
+			st.setString(6, email);
+			st.setString(7, phone);
+			st.setString(8, password);
 
 			st.executeUpdate();
 			System.out.println("one row inserted...");
@@ -97,10 +97,8 @@ public class DoctorRepository {
 				output += "<td>" + Password + "</td>"; 
 				 
 			    // buttons     
-				output += "<td><input name='btnUpdate'"
-						+ "type='button' value='Update'"
-						+ "class='btnUpdate btn btn-secondary'></td>"       
-						+ "<td><input name='btnRemove' ype='button' value='Remove' class='btnRemove btn btn-danger' "
+				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"       
+						+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' "
 						+ "data-itemid='" + Doctor_id + "'>" + "</td></tr>";
 				
 				

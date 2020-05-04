@@ -1,7 +1,10 @@
 package resource;
 
 import java.io.IOException;
+
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +14,7 @@ import repository.DoctorRepository;
 /**
  * Servlet implementation class DoctorAPI
  */
+@WebServlet("/DoctorAPI")
 public class DoctorAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,10 +40,12 @@ public class DoctorAPI extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		DoctorRepository dr  = new DoctorRepository();
-		//String output = dr.create(re)
-		
-		
-		doGet(request, response);
+		String output = dr.create(request.getParameter("doctorName"),
+				request.getParameter("ddlSpecialization"),request.getParameter("ddlHospital"),request.getParameter("nic"),request.getParameter("email"),
+				request.getParameter("phone"),request.getParameter("password"));
+		response.getWriter().write(output);
+		System.out.println(">>>>>>>>>>>");
+		//doGet(request, response);
 	}
 
 	/**
