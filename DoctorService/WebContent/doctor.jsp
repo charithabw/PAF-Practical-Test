@@ -27,10 +27,16 @@
   <span class="input-group-text" id="lblName"> Specialization: </span>  </div>  
   <select id="ddlSpecialization" name="ddlSpecialization">   
   <option value="0">--Select Specialization--</option>   
-  <option value="1">1st Hospital</option>   
-  <option value="2">2nd year</option>   
-  <option value="3">3rd year</option>   
-  <option value="4">4th year</option>  </select> 
+  <option value="1">1 - ALLERGY & IMMUNOLOGY</option>   
+  <option value="2">2 - ANESTHESIOLOGY</option>   
+  <option value="3">3 - DERMATOLOGY</option>   
+  <option value="4">4 - DIAGNOSTIC RADIOLOGY</option>
+  <option value="5">5 - EMERGENCY MEDICINE</option>
+  <option value="6">6 - FAMILY MEDICINE</option>
+  <option value="7">7 - INTERNAL MEDICINE</option>
+  <option value="8">8 - MEDICAL GENETICS</option>
+  <option value="9">9 - NEUROLOGY</option>
+  <option value="10">10 - NUCLEAR MEDICINE</option>  </select> 
   </div> 
    
   <br><div class="input-group input-group-sm mb-3">  
@@ -38,10 +44,13 @@
   <span class="input-group-text" id="lblName"> Hospital: </span>  </div>  
   <select id="ddlHospital" name="ddlHospital">   
   <option value="0">--Select Hospital--</option>   
-  <option value="1">1st Hospital</option>   
-  <option value="2">2nd year</option>   
-  <option value="3">3rd year</option>   
-  <option value="4">4th year</option>  </select> 
+  <option value="1">1 - NAVALOKA</option>   
+  <option value="2">2 - LANKA HOSPITAL</option>   
+  <option value="3">3 - ASIRI</option>   
+  <option value="4">4 - NINEWELLS</option>
+   <option value="5">5 - DURDANS</option>
+   <option value="6">6 - APEKSHA</option>
+   <option value="7">7 - GOLDEN KEY</option> </select> 
   </div> 
  
   

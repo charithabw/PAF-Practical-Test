@@ -1,9 +1,12 @@
 package repository;
 
+import java.awt.Window;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,16 +30,18 @@ public class DoctorRepository {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		//int i =getLastID();
 	}
 
 	public String create(String doctorName, String specialization, String hospital, String nic, String email, String phone, String password) {
+		
 		String output = "";
 		String sql = "INSERT INTO doctormanagement VALUES (?,?,?,?,?,?,?,?)";
-
+		int id = getLastID();//getting next id for auto increment 
 		try {
 			PreparedStatement st = con.prepareStatement(sql);
 
-			st.setInt(1, 12);
+			st.setInt(1, id+1);
 			st.setString(2, doctorName);
 			st.setInt(3, Integer.parseInt(specialization));
 			st.setInt(4, Integer.parseInt(hospital));
@@ -47,7 +52,7 @@ public class DoctorRepository {
 
 			st.executeUpdate();
 			System.out.println("one row inserted...");
-			
+			getLastID();
 			String newItems = viewDoctor();    
 			output = "{\"status\":\"success\", \"data\": \"" + newItems + "\"}";
 		} catch (Exception e) {
@@ -86,9 +91,8 @@ public class DoctorRepository {
 				
 				
 				output += "<tr><td><input id='hidItemIDUpdate'"
-						+ "name='hidItemIDUpdate'"
-						+ "type='hidden' value='" + Doctor_id      
-						+ "'>"+ Doctor_name + "</td>";     
+						+"name='hidItemIDUpdate' type='hidden'" 
+						+"value='" + Doctor_id + "'>"+ Doctor_name + "</td>";     
 				output += "<td>" + Specialization + "</td>";    
 				output += "<td>" + Hospital_id + "</td>";     
 				output += "<td>" + NIC + "</td>"; 
@@ -98,8 +102,8 @@ public class DoctorRepository {
 				 
 			    // buttons     
 				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"       
-						+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' "
-						+ "data-itemid='" + Doctor_id + "'>" + "</td></tr>";
+						+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-itemid='" 
+						+ Doctor_id + "'>" + "</td></tr>";
 				
 				
 				
@@ -138,44 +142,60 @@ public class DoctorRepository {
 		return d;
 	}
 
-	public void update(Doctor d) {
-
+	public String update(String doctorID, String doctorName, String specialization, String hospital, String nic, String email, String phone, String password) {
+		
+		String output = "";
 		String sql = "UPDATE doctormanagement SET Doctor_name=?, Specialization=?, Hospital_id=?, NIC=?, Email=?, Phone=?, Password=? WHERE Doctor_id=?";
 
 		try {
 			PreparedStatement st = con.prepareStatement(sql);
 
-			st.setString(1, d.getDoctor_name());
-			st.setInt(2, d.getSpecialization());
-			st.setInt(3, d.getHospital_id());
-			st.setString(4, d.getNIC());
-			st.setString(5, d.getEmail());
-			st.setString(6, d.getPhone());
-			st.setString(7, d.getPassword());
-			st.setInt(8, d.getDoctor_id());
-			st.executeUpdate();
+			st.setString(1, doctorName );
+			st.setInt(2, Integer.parseInt(specialization));
+			st.setInt(3, Integer.parseInt(hospital));
+			st.setString(4, nic);
+			st.setString(5, email);
+			st.setString(6, phone);
+			st.setString(7, password);
+			st.setInt(8, Integer.parseInt(doctorID));
+			st.execute();
 			
 			System.out.println("one row updated...");
+			
+			String newItems = viewDoctor();    
+			output = "{\"status\":\"success\", \"data\": \"" +        newItems + "\"}";   
 		} catch (Exception e) {
+			output = "{\"status\":\"error\", \"data\": \"Error while updating the item.\"}";   
 			System.out.println(e);
 		}
+		return output;
 
 	}
 
-	public void delete(int id) {
+	public String delete(String doctorID) {
+		
+		  
+		
+		String output = "";
 		String sql = "DELETE FROM doctormanagement WHERE doctor_ID=?";
 
 		try {
 			PreparedStatement st = con.prepareStatement(sql);
 
-			st.setInt(1, id);
+			st.setInt(1, Integer.parseInt(doctorID));
 
 			st.executeUpdate();
 			
 			System.out.println("one row deleted...");
+			
+			String newItems = viewDoctor();
+			output = "{\"status\":\"success\", \"data\": \"" 
+			+        newItems + "\"}"; 
 		} catch (Exception e) {
+			output = "{\"status\":\"error\", \"data\":\"Error while deleting the item.\"}";   
 			System.out.println(e);
 		}
+		return output;
 	}
 	
 	public List<Appointment> viewAppointment(int id){
@@ -206,6 +226,25 @@ public class DoctorRepository {
 			System.out.println(e);
 		}
 		return appointments;
+	}
+	
+	public int getLastID() {
+	    int id = 0;
+	    try {
+	        String sql="select MAX(Doctor_id) from doctormanagement "; // here I want some logic that will fetch only leave_id from last row only
+	        Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+	      
+			if(rs.next()){
+				id=rs.getInt(1);
+				
+			}
+			//System.out.println(id);
+	    }
+	    catch(Exception e){
+	    	
+	    }
+	    return id;
 	}
 	
 
