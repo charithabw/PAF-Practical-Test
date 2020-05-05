@@ -43,7 +43,7 @@ public class DoctorAPI extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String output = dr.create(request.getParameter("doctorName"),
+		String output = dr.create(request.getParameter("doctorName").toString(),
 				request.getParameter("ddlSpecialization"),request.getParameter("ddlHospital"),request.getParameter("nic"),request.getParameter("email"),
 				request.getParameter("phone"),request.getParameter("password"));
 		response.getWriter().write(output);
@@ -63,7 +63,7 @@ public class DoctorAPI extends HttpServlet {
 				 paras.get("phone").toString(),paras.get("password").toString());
 		 
 		 response.getWriter().write(output); 
-		 System.out.println(">>>>>>>>>>>");
+		// System.out.println(">>>>>>>>>>>");
 		
 	}
 

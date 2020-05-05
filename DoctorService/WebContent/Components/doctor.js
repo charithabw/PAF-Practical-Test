@@ -79,6 +79,9 @@ $("#hidItemIDSave").val("");
 $("#formItem")[0].reset();
 } 
 
+function getDeleteConfirmation() {
+	var retVal = confirm("Do you want to continue ?");
+	if( retVal == true ) {
 $(document).on("click", ".btnRemove", function(event) 
 		
 	  
@@ -97,10 +100,13 @@ $(document).on("click", ".btnRemove", function(event)
 		});
 		
 });
-
+	}
+}
 
 function onItemDeleteComplete(response, status) 
 {  
+	
+		
 	if (status == "success")  
 	{   
 		var resultSet = JSON.parse(response); 
@@ -127,7 +133,10 @@ if (resultSet.status.trim() == "success")
 		$("#alertError").show(); 
 		} 
 	} 
-
+ 
+function getUpdateConfirmation(){
+	 var retVal = confirm("Do you want to continue ?");
+	 if(retVal == true){
 $(document).on("click", ".btnUpdate", function(event) 
 		{     
 	$("#hidItemIDSave").val($(this).closest("tr").find('#hidItemIDUpdate').val());     
@@ -139,8 +148,9 @@ $(document).on("click", ".btnUpdate", function(event)
 	$("#phone").val($(this).closest("tr").find('td:eq(5)').text()); 
 	$("#password").val($(this).closest("tr").find('td:eq(6)').text()); 
 	
-	}); 
-
+	});
+	 }
+}
 
 function validateDoctorForm() { 
  
@@ -193,4 +203,5 @@ function validateDoctorForm() {
 	
 	 return true; 
 	 } 
+
 

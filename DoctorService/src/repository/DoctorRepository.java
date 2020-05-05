@@ -90,9 +90,8 @@ public class DoctorRepository {
 				String Password = (rs.getString(8));
 				
 				
-				output += "<tr><td><input id='hidItemIDUpdate'"
-						+"name='hidItemIDUpdate' type='hidden'" 
-						+"value='" + Doctor_id + "'>"+ Doctor_name + "</td>";     
+				output += "<tr><td><input id='hidItemIDUpdate'name='hidItemIDUpdate'type='hidden' value='" + Doctor_id 
+						+ "'>"+ Doctor_name + "</td>";     
 				output += "<td>" + Specialization + "</td>";    
 				output += "<td>" + Hospital_id + "</td>";     
 				output += "<td>" + NIC + "</td>"; 
@@ -101,8 +100,8 @@ public class DoctorRepository {
 				output += "<td>" + Password + "</td>"; 
 				 
 			    // buttons     
-				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"       
-						+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-itemid='" 
+				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary' onclick  = 'getUpdateConfirmation()'></td>"       
+						+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' onclick  = 'getDeleteConfirmation()' data-itemid='" 
 						+ Doctor_id + "'>" + "</td></tr>";
 				
 				
@@ -163,7 +162,8 @@ public class DoctorRepository {
 			System.out.println("one row updated...");
 			
 			String newItems = viewDoctor();    
-			output = "{\"status\":\"success\", \"data\": \"" +        newItems + "\"}";   
+			output = "{\"status\":\"success\", \"data\": \"" +        
+			newItems + "\"}";   
 		} catch (Exception e) {
 			output = "{\"status\":\"error\", \"data\": \"Error while updating the item.\"}";   
 			System.out.println(e);
