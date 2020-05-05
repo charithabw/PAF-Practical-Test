@@ -54,7 +54,7 @@ function onItemSaveComplete(response, status)
 			 document.getElementById('email').value = "";
 			 document.getElementById('phone').value = "";
 			 document.getElementById('password').value = "";
-			 
+			 document.getElementById('password2').value = "";
 		
 			$("#divItemsGrid").html(resultSet.data);   
 		 }
@@ -159,7 +159,11 @@ function validateDoctorForm() {
 	if ($("#doctorName").val().trim() == "")  
 	{   
 		return "Insert Doctor Name.";  
-		} 
+		}
+	
+	if(!document.getElementById('doctorName').value.match(/^[A-Za-z ]+$/)){
+		return "You cant insert numarical values to the name field"; 
+	}
 	 
 	 // special
 	if ($("#ddlSpecialization").val() == "0") 
@@ -195,12 +199,21 @@ function validateDoctorForm() {
 	{   
 		return "Insert Phone.";  
 		} 
-	 //phone
+	
+	if(!$("#phone").val().match(/^\d{10}$/g)){
+		return "Phone number not match.";
+	}
+	 //password
 	if ($("#password").val().trim() == "")  
 	{   
 		return "Insert Password.";  
 		}
-	
+	if($("#password").val().length < 3){
+		return "Your Password length not enough."; 
+	}
+	if(document.getElementById('password').value != document.getElementById('password2').value){
+		return "Password not match."; 
+	}
 	 return true; 
 	 } 
 

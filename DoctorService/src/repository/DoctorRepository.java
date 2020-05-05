@@ -149,7 +149,7 @@ public class DoctorRepository {
 		try {
 			PreparedStatement st = con.prepareStatement(sql);
 
-			st.setString(1, doctorName );
+			st.setString(1, doctorName.toString() );
 			st.setInt(2, Integer.parseInt(specialization));
 			st.setInt(3, Integer.parseInt(hospital));
 			st.setString(4, nic);
@@ -162,8 +162,7 @@ public class DoctorRepository {
 			System.out.println("one row updated...");
 			
 			String newItems = viewDoctor();    
-			output = "{\"status\":\"success\", \"data\": \"" +        
-			newItems + "\"}";   
+			output = "{\"status\":\"success\", \"data\": \"" + newItems + "\"}";   
 		} catch (Exception e) {
 			output = "{\"status\":\"error\", \"data\": \"Error while updating the item.\"}";   
 			System.out.println(e);
