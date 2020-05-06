@@ -1,0 +1,17 @@
+IT18166316
+Weerasooriya W.M.C.B.
+Y3S1G1.1
+
+Doctor Service
+
+*DB name - ayuwedha(mySQL , XAMPP)
+*tables - 
+	appointmentmanagement 
+	creditcards  
+	doctormanagement 
+	hospitalmanagement 
+	patientmanagement 
+	paymentmanagement
+	specialization
+
+*I am using  doctormanagement, specialization, hospitalmanagement
