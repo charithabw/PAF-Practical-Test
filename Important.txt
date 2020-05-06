@@ -1,0 +1,14 @@
+IT18166316
+Weerasooriya W.M.C.B.
+Y3S1G1.1
+
+Doctor Service
+
+you can't enter,
+  names - integer values
+  phone - String values
+  
+email - real email type (ex - abc@gmail.com)
+phone - only integer and length is 10
+password - minimum length is 3
+re password - it must be the same as password
