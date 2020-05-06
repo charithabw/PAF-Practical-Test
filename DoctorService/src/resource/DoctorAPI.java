@@ -44,8 +44,12 @@ public class DoctorAPI extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String output = dr.create(request.getParameter("doctorName").toString(),
-				request.getParameter("ddlSpecialization"),request.getParameter("ddlHospital"),request.getParameter("nic"),request.getParameter("email"),
-				request.getParameter("phone"),request.getParameter("password"));
+				request.getParameter("ddlSpecialization"),
+				request.getParameter("ddlHospital"),
+				request.getParameter("nic"),
+				request.getParameter("email"),
+				request.getParameter("phone"),
+				request.getParameter("password"));
 		response.getWriter().write(output);
 		
 		//doGet(request, response);
@@ -58,9 +62,14 @@ public class DoctorAPI extends HttpServlet {
 		// TODO Auto-generated method stub
 		Map paras = getParasMap(request); 
 		 
-		 String output = dr.update(paras.get("hidItemIDSave").toString(),paras.get("doctorName").toString(),paras.get("ddlSpecialization").toString(),
-				 paras.get("ddlHospital").toString(),paras.get("nic").toString(), paras.get("email").toString(),
-				 paras.get("phone").toString(),paras.get("password").toString());
+		 String output = dr.update(paras.get("hidItemIDSave").toString(),
+				 paras.get("doctorName").toString().replace("+", " "),
+				 paras.get("ddlSpecialization").toString(),
+				 paras.get("ddlHospital").toString(),
+				 paras.get("nic").toString(),
+				 paras.get("email").toString().replace("%40", "@"),
+				 paras.get("phone").toString(),
+				 paras.get("password").toString());
 		 
 		 response.getWriter().write(output); 
 		// System.out.println(">>>>>>>>>>>");
